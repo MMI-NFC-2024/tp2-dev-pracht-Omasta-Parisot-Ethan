@@ -5,7 +5,8 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <Header />
-  <h1 class="text-2xl mb-4">Penguins par espèce (iframe)</h1>
+  <h1 class="text-2xl font-extrabold mb-4 text-center bg-clip-text text-amber-50" style="background: linear-gradient(90deg,#2563eb,#10b981);">
+Penguins par espèce (iframe)</h1>
   <nav>
     <a href="/species/Adelie" target="penguinFrame">Adelie</a> |
     <a href="/species/Chinstrap" target="penguinFrame">Chinstrap</a> |
@@ -30,3 +31,37 @@ import Layout from "../layouts/Layout.astro";
     }
   </script>
 </Layout>
+
+<style>
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #374151;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: #2563eb;
+  }
+
+  nav a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, #2563eb, #10b981);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  nav a:hover::after {
+    transform: scaleX(1);
+  }
+</style>
