@@ -3,9 +3,12 @@ import PlotFigure from "../components/PlotFigure.astro";
 import Layout from "../layouts/Layout.astro";
 import * as Plot from "@observablehq/plot";
 import penguins from "../assets/penguins.json";
+import Header from "../components/Header.astro";
+
 ---
 
 <Layout>
+  <Header />
   <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
   <PlotFigure
     options={{
@@ -18,4 +21,5 @@ import penguins from "../assets/penguins.json";
       ],
     }}
   />
+  <p>Number of Adelie Penguins: {penguins.length}</p> 
 </Layout>

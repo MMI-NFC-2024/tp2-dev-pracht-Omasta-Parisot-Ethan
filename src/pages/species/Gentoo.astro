@@ -1,0 +1,26 @@
+---
+import * as Plot from "@observablehq/plot";
+import penguins from '../../assets/penguins.json';
+import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+import PlotFigure from '../../components/PlotFigure.astro';
+
+const penguinsGentoo = penguins.filter(({species}) => species === "Gentoo");
+---
+
+<Layout>
+  <Header />
+  <h1 class="text-2xl">Chinstrap Penguins</h1>
+  <PlotFigure
+    options={{
+      marks: [
+        Plot.dot(penguinsGentoo, {
+          x: "culmen_length_mm",
+          y: "culmen_depth_mm",
+          stroke: "species",
+        }),
+      ],
+    }}
+  />
+  <p>Number of Adelie Penguins: {penguinsGentoo.length}</p> 
+</Layout>
