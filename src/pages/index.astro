@@ -5,21 +5,76 @@ import * as Plot from "@observablehq/plot";
 import penguins from "../assets/penguins.json";
 import Header from "../components/Header.astro";
 
+const adelie = penguins.filter(d => d.species === "Adelie");
+const chinstrap = penguins.filter(d => d.species === "Chinstrap");
+const gentoo = penguins.filter(d => d.species === "Gentoo");
 ---
 
 <Layout>
   <Header />
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
-  <p>Number of Adelie Penguins: {penguins.length}</p> 
+
+  <h1 class="text-2xl mb-4">Penguins par espèce</h1>
+
+  <!-- Menu avec ancres -->
+  <nav class="menu">
+    <a href="#adelie">Adelie</a>
+    <a href="#chinstrap">Chinstrap</a>
+    <a href="#gentoo">Gentoo</a>
+  </nav>
+
+  <!-- Slider horizontal -->
+  <div class="slider">
+    <section id="adelie" class="slide">
+      <h2>Adelie Penguins</h2>
+      <PlotFigure
+        options={{
+          marks: [Plot.dot(adelie, { x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species" })],
+        }}
+      />
+      <p>Number of Adelie Penguins: {adelie.length}</p>
+    </section>
+
+    <section id="chinstrap" class="slide">
+      <h2>Chinstrap Penguins</h2>
+      <PlotFigure
+        options={{
+          marks: [Plot.dot(chinstrap, { x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species" })],
+        }}
+      />
+      <p>Number of Chinstrap Penguins: {chinstrap.length}</p>
+    </section>
+
+    <section id="gentoo" class="slide">
+      <h2>Gentoo Penguins</h2>
+      <PlotFigure
+        options={{
+          marks: [Plot.dot(gentoo, { x: "culmen_length_mm", y: "culmen_depth_mm", stroke: "species" })],
+        }}
+      />
+      <p>Number of Gentoo Penguins: {gentoo.length}</p>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .menu {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+
+  .slide {
+    min-width: 100%;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+</style>
