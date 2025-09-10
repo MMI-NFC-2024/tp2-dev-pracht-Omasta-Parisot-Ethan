@@ -1,0 +1,32 @@
+---
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <Header />
+  <h1 class="text-2xl mb-4">Penguins par espèce (iframe)</h1>
+  <nav>
+    <a href="/species/Adelie" target="penguinFrame">Adelie</a> |
+    <a href="/species/Chinstrap" target="penguinFrame">Chinstrap</a> |
+    <a href="/species/Gentoo" target="penguinFrame">Gentoo</a>
+  </nav>
+  <iframe
+    name="penguinFrame"
+    src="/species/Adelie"
+    style="width:100%; min-height:600px; border:1px solid #ccc; margin-top:1rem; transition:height 0.2s;"
+    onload="resizeIframe(this)"
+  ></iframe>
+  <script>
+    function resizeIframe(iframe) {
+      try {
+        setTimeout(() => {
+          if (iframe.contentWindow && iframe.contentWindow.document.body) {
+            const newHeight = iframe.contentWindow.document.body.scrollHeight;
+            iframe.style.height = (newHeight > 600 ? newHeight : 600) + 'px';
+          }
+        }, 150);
+      } catch (e) {}
+    }
+  </script>
+</Layout>
